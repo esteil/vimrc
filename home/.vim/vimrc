@@ -1,0 +1,206 @@
+" .vimrc
+"
+" Based on janus
+
+" Load Vundle and everything
+source bundles.vim
+
+" Set <Leader> to a comma
+let mapleader=","
+
+" Enable line numbers
+set number
+
+" Enable position in status bar
+set ruler
+
+" Enable syntax highlighting
+syntax on
+
+" Whitespace
+set wrap
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set list listchars=tab:→,trail:∙
+
+" Searching
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" Tab completion
+set wildmode=list:longest,list:full
+
+" Various files to ignore for command-T and tab completion
+set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
+set wildignore+=public/photo*/**
+set wildignore+=log/**
+set wildignore+=tmp/**
+set wildignore+=vendor/cache/**
+set wildignore+=solr/**
+set wildignore+=dump/**
+set wildignore+=wp-content/uploads/**
+set wildignore+=wp-content/themes/betanews/images/media/**
+set wildignore+=db_dumps/**
+
+" Without setting this, ZoomWin restores windows in a way that causes
+" equalalways behavior to be triggered the next time Command-T is used.
+" This is likely a bludgeon to solve some other issue, but it works
+set noequalalways
+
+" NERDTree configuration
+let NERDTreeIgnore=['\.rbc$', '\~$']
+map <Leader>n :NERDTreeToggle<CR>
+
+" Command-T configuration {{{
+
+let g:CommandTMaxHeight=20
+
+" Open in new tabs when pressing Enter, and same tab when pressing
+" ctrl-T.  This inverts the default behavior
+let g:CommandTAcceptSelectionMap='<C-t>'
+let g:CommandTAcceptSelectionTabMap='<CR>'
+
+let g:CommandTMaxFiles=20000
+
+" Refresh Command T
+map <Leader>tr :CommandTFlush<CR>
+map <Leader>b :CommandTBuffer<CR>
+
+" End Command-T }}}
+
+" ZoomWin configuration
+map <Leader><Leader> :ZoomWin<CR>
+
+" CTags {{{
+
+" Refresh tags
+map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
+map <C-\> :tnext<CR>
+
+" End CTags }}}
+
+" Remember the last location in file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+    \| exe "normal g'\"" | endif
+endif
+
+" Configure for markdown and markdown-preview, and some other text
+" formatting
+function s:setupWrapping()
+  set wrap
+  set wm=2
+  set textwidth=72
+endfunction
+
+function s:setupMarkup()
+  call s:setupWrapping()
+  map <buffer> <Leader>p :Mm <CR>
+endfunction
+
+au BufRead,BufNewFile *.{md,markdown,mdown,mkd,mkdn} call s:setupMarkup()
+au BufRead,BufNewFile *.txt call s:setupWrapping()
+
+" Makefiles use real tabs
+au FileType make set noexpandtab
+
+" Additional files types
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
+au BufRead,BufNewFile *.thtml set ft=smarty
+
+" Make python follow PEP8
+au FileType python set tabstop=4 textwidth=79
+
+" Allow backspacing over everythign in insert mode
+set backspace=indent,eol,start
+
+" Open a (tab)edit command with the current file path filled in
+map <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+map <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>\
+
+" Insert the path of the current file into a command
+cmap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+
+" Unimpaired configuration {{{
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
+
+" End Unimpaired }}}
+
+" Enable syntastic syntax checking
+let g:syntastic_enable_signs=1
+let g:syntastic_quiet_warnings=1
+
+" Gist-vim
+if has("mac")
+  let g:gist_clip_command='pbcopy'
+elseif has("unix")
+  let g:gist_clip_command='xclip -selection clipboard'
+endif
+let g:gist_detect_filetype=1
+let g:gist_open_browser_after_post=1
+
+" Enable modelines
+set modeline
+set modelines=10
+
+" Default color scheme
+colorscheme railscasts
+
+" Directories for swp files
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+
+" Enable % bouncing between markers
+runtime! macros/matchit.vim
+
+" Sort the taglist by names
+let Tlist_Sort_Type = "name"
+let Tlist_WinWidth = 40
+
+" EasyMotion uses <Leader>m prefix
+let g:EasyMotion_leader_key = '<Leader>m'
+
+" Sessions configuration
+let g:session_autosave=1
+
+" Additional mappings {{{
+
+" Git shortcuts
+"  <Leader>gc -> git commit
+"  <Leader>gs -> git status
+"  <Leader>ga -> git commit -a
+map <Leader>gc :Gcommit<CR>
+map <Leader>ga :Gcommit -a<CR>
+map <Leader>gs :Gstatus<CR>
+
+" <Leader>s to clear the search
+map <silent> <Leader>s :silent :nohlsearch<CR>
+
+" }}}
+
+" Utility function to clear out any unloaded buffers
+function! CloseUnloadedBuffers()
+  let lastBuffer = bufnr('$')
+
+  let currentBuffer = 1
+  while currentBuffer <= lastBuffer
+    " If the buffer exists, is shown in :ls output, and isn't loaded
+    if bufexists(currentBuffer) && buflisted(currentBuffer) && bufloaded(currentBuffer) == 0
+      execute 'bdelete' currentbuffer
+    endif
+
+    let currentBuffer = currentBuffer + 1
+  endwhile
+endfunction
+

@@ -1,0 +1,80 @@
+" .gvimrc
+
+" Set defualt font
+set guifont=Inconsolata:h14
+
+" Enable folding column
+set foldcolumn=1
+
+" Don't fold by default
+set foldlevelstart=99
+
+" Macvim configuration
+if has("gui_macvim")
+  " Make Cmd-Shift-T open a new, empty tab
+  macmenu &File.New\ Tab key=<D-T>
+  macmenu &File.Open\ Tab\.\.\. key="<nop>
+
+  " Fullscreen takes up the entire screen
+  set fuoptions=maxhorz,maxvert
+
+  " Command-T triggers command-t plugin
+  map <D-t> :CommandT<CR>
+  imap <D-t> <Esc>:CommandT<CR>
+
+  " Command-Return for full screen
+  macmenu Window.Toggle\ Full\ Screen\ Mode key=<D-CR>
+
+  " Command-Shift-F for Ack
+  map <D-F> :Ack<space>
+
+  " Command-/ to toggle comments
+  map <D-/> <plug>NERDCommenterToggle<CR>
+
+  " Command-][ to increase/decrease indentation
+  vmap <D-]> >gv
+  vmap <D-[> <gv
+
+  " Map Command-# to switch tabs
+  map  <D-0> 0gt
+  imap <D-0> <Esc>0gt
+  map  <D-1> 0gt
+  imap <D-1> <Esc>0gt
+  map  <D-2> 0gt
+  imap <D-2> <Esc>0gt
+  map  <D-3> 0gt
+  imap <D-3> <Esc>0gt
+  map  <D-4> 0gt
+  imap <D-4> <Esc>0gt
+  map  <D-5> 0gt
+  imap <D-5> <Esc>0gt
+  map  <D-6> 0gt
+  imap <D-6> <Esc>0gt
+  map  <D-7> 0gt
+  imap <D-7> <Esc>0gt
+  map  <D-8> 0gt
+  imap <D-8> <Esc>0gt
+  map  <D-9> 0gt
+  imap <D-9> <Esc>0gt
+
+  " Command-Option-ARROW switches viewports
+  map  <D-M-Up> <C-w>k
+  imap <D-M-Up> <Esc><C-w>k
+  map  <D-M-Down> <C-w>j
+  imap <D-M-Down> <Esc><C-w>j
+  map  <D-M-Right> <C-w>l
+  imap <D-M-Right> <Esc><C-w>l
+  map  <D-M-Left> <C-w>h
+  imap <D-M-Left> <Esc><C-w>h
+  
+  " Adjust viewports to the same size
+  map <Leader>= <C-w>=
+  imap <Leader>= <Esc><C-w>=
+endif
+
+" Start up without the toolbar
+set guioptions-=T
+
+" NERDTree
+source nerdtree_functions.vim
+

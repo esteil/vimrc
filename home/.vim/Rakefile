@@ -1,0 +1,13 @@
+# Rake tasks to install and build various parts of this vim setup
+
+desc "Install everything"
+task :install do
+  puts "Cloning vundle..."
+  sh "git clone http://github.com/gmarik/vundle.git bundle/vundle"
+
+  puts "Installing all bundles"
+  sh "mvim -u bundles.vim +BundleInstall +q"
+
+  puts "Building command-T"
+  
+end
