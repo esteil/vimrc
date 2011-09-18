@@ -14,6 +14,12 @@ set number
 " Enable position in status bar
 set ruler
 
+" Always show status bar
+set laststatus=2
+
+" Configure status bar with git branch
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
 " Enable syntax highlighting
 syntax on
 
