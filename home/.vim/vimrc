@@ -20,6 +20,17 @@ set laststatus=2
 " Configure status bar with git branch
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
+"" TEST STATUS
+set statusline=\  " prefix with space
+set statusline+=%f " filename
+set statusline+=%h%1*%m%r%w%0* " flags
+set statusline+=%(\ %{fugitive#statusline()}%) " git branch
+set statusline+=%= " right align
+set statusline+=[
+set statusline+=%{strlen(&ft)?&ft:'none'}, " filetype
+set statusline+=%{&fileformat}]\  " file format
+set statusline+=%-14.(%l,%c%V%)\ %<%P\  "offset
+
 " Enable syntax highlighting
 syntax on
 
