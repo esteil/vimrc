@@ -67,7 +67,7 @@ endfunction
 
 " Utility functions to create file commands
 function s:CommandCabbr(abbreviation, expansion)
-  execute 'cabbrev ' . a:abbreviation, ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
+  execute 'cabbrev ' . a:abbreviation . ' <c-r>=getcmdpos() == 1 && getcmdtype() == ":" ? "' . a:expansion . '" : "' . a:abbreviation . '"<CR>'
 endfunction
 
 function s:FileCommand(name, ...)

@@ -3,7 +3,7 @@
 " Based on janus
 
 " Load Vundle and everything
-source bundles.vim
+source ~/.vim/bundles.vim
 
 " Set <Leader> to a comma
 let mapleader=","

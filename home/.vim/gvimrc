@@ -13,7 +13,7 @@ set foldlevelstart=99
 if has("gui_macvim")
   " Make Cmd-Shift-T open a new, empty tab
   macmenu &File.New\ Tab key=<D-T>
-  macmenu &File.Open\ Tab\.\.\. key="<nop>
+  macmenu &File.Open\ Tab\.\.\. key=<nop>
 
   " Fullscreen takes up the entire screen
   set fuoptions=maxhorz,maxvert
@@ -76,5 +76,5 @@ endif
 set guioptions-=T
 
 " NERDTree
-source nerdtree_functions.vim
+source ~/.vim/nerdtree_functions.vim
 
