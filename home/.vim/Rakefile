@@ -1,13 +1,38 @@
 # Rake tasks to install and build various parts of this vim setup
 
 desc "Install everything"
-task :install do
+task :install => [:prepare, :clone, :setup]
+
+desc "Prepare" 
+task :prepare do
+  mkdir_p "bundle"
+  mkdir_p "backup"
+  mkdir_p "session"
+end
+
+desc "Clone vundle"
+task :clone do
   puts "Cloning vundle..."
   sh "git clone http://github.com/gmarik/vundle.git bundle/vundle"
+end
 
+desc "Setup initial bundles"
+task :setup do
   puts "Installing all bundles"
-  sh "mvim -u bundles.vim +BundleInstall +q"
+  sh "mvim -u bundles.vim --nofork +BundleInstall +q"
 
+  Rake::Task['command_t'].execute
+end
+
+desc "Update bundles"
+task :update do
+  puts "Updating all bundles"
+  sh "mvim -u bundles.vim --nofork +BundleUpdate +q"
+  Rake::Task['command_t'].execute
+end
+
+desc "Build Command T"
+task :command_t do
   puts "Building command-T"
-  
+  sh "cd bundle/Command-T/ruby/command-t && /usr/bin/ruby extconf.rb && make"
 end
