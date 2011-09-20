@@ -42,6 +42,8 @@ Bundle 'Rename'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'wincent/Command-T'
 Bundle 'JSON.vim'
+Bundle 'tpope/vim-haml'
+Bundle 'repeat.vim'
 
 " Finish
 filetype plugin indent on
