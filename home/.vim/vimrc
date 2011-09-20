@@ -189,7 +189,10 @@ let Tlist_WinWidth = 40
 let g:EasyMotion_leader_key = '<Leader>m'
 
 " Sessions configuration
-let g:session_autosave=1
+let g:session_autosave = 'yes'
+
+" Don't save buffers that aren't visible
+set sessionoptions-=buffers
 
 " Additional mappings {{{
 
@@ -214,7 +217,7 @@ function! CloseUnloadedBuffers()
   while currentBuffer <= lastBuffer
     " If the buffer exists, is shown in :ls output, and isn't loaded
     if bufexists(currentBuffer) && buflisted(currentBuffer) && bufloaded(currentBuffer) == 0
-      execute 'bdelete' currentbuffer
+      execute 'bdelete' currentBuffer
     endif
 
     let currentBuffer = currentBuffer + 1
