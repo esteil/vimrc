@@ -27,8 +27,14 @@ end
 desc "Update bundles"
 task :update do
   puts "Updating all bundles"
-  sh "mvim -u bundles.vim --nofork +BundleUpdate +q"
+  sh "mvim -u bundles.vim --nofork +BundleInstall\! +q"
   Rake::Task['command_t'].execute
+end
+
+desc "Clean outdated bundles"
+task :clean do
+  puts "Cleaning bundles"
+  sh "mvim -u bundles.vim --nofork +BundleClean +q"
 end
 
 desc "Build Command T"
