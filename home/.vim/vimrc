@@ -110,8 +110,8 @@ endif
 " formatting
 function s:setupWrapping()
   set wrap
-  set wm=2
-  set textwidth=72
+  setlocal wm=2
+  setlocal textwidth=72
 endfunction
 
 function s:setupMarkup()
