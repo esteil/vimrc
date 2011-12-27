@@ -46,6 +46,8 @@ Bundle 'tpope/vim-haml'
 Bundle 'repeat.vim'
 Bundle 'ChrisKempson/Vim-Tomorrow-Theme'
 Bundle 'djjcast/mirodark'
+Bundle 'kien/tabman.vim'
+Bundle 'majutsushi/tagbar'
 
 " Finish
 filetype plugin indent on
