@@ -68,6 +68,9 @@ set wildignore+=db_dumps/**
 " This is likely a bludgeon to solve some other issue, but it works
 set noequalalways
 
+" Add :sudow to write out with root permissions
+command! -bar -nargs=0 Sudow :w !sudo tee %
+
 " NERDTree configuration
 let NERDTreeIgnore=['\.rbc$', '\~$']
 map <Leader>n :NERDTreeToggle<CR>
@@ -140,8 +143,9 @@ au BufRead,BufNewFile *.txt call s:setupWrapping()
 au FileType make set noexpandtab
 
 " Additional files types
-au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
-au BufRead,BufNewFile *.thtml set ft=smarty
+au BufRead,BufNewFile {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} setf ruby
+au BufRead,BufNewFile *.rabl setf ruby
+au BufRead,BufNewFile *.thtml setf smarty
 
 " Make python follow PEP8
 au FileType python set tabstop=4 textwidth=79

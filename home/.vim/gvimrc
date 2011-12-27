@@ -1,7 +1,8 @@
 " .gvimrc
 
 " Set defualt font
-set guifont=Inconsolata:h14
+"set guifont=Inconsolata:h14
+set guifont=Ubuntu\ Mono:h15
 
 " Enable folding column
 set foldcolumn=1
