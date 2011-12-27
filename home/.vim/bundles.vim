@@ -44,6 +44,8 @@ Bundle 'wincent/Command-T'
 Bundle 'JSON.vim'
 Bundle 'tpope/vim-haml'
 Bundle 'repeat.vim'
+Bundle 'ChrisKempson/Vim-Tomorrow-Theme'
+Bundle 'djjcast/mirodark'
 
 " Finish
 filetype plugin indent on

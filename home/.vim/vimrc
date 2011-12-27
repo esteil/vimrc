@@ -173,6 +173,7 @@ set modelines=10
 
 " Default color scheme
 colorscheme railscasts
+" colorscheme mirodark
 
 " Directories for swp files
 set backupdir=~/.vim/backup
