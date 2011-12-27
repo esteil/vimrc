@@ -48,6 +48,7 @@ Bundle 'ChrisKempson/Vim-Tomorrow-Theme'
 Bundle 'djjcast/mirodark'
 Bundle 'kien/tabman.vim'
 Bundle 'majutsushi/tagbar'
+Bundle 'gmarik/sudo-gui.vim'
 
 " Finish
 filetype plugin indent on
