@@ -49,6 +49,8 @@ Bundle 'djjcast/mirodark'
 Bundle 'kien/tabman.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'gmarik/sudo-gui.vim'
+Bundle 'skammer/vim-css-color'
+Bundle 'juvenn/mustache.vim'
 
 " Finish
 filetype plugin indent on
