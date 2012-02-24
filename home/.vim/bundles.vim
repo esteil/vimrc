@@ -52,6 +52,7 @@ Bundle 'gmarik/sudo-gui.vim'
 Bundle 'skammer/vim-css-color'
 Bundle 'juvenn/mustache.vim'
 Bundle 'sjl/badwolf'
+Bundle 'harleypig/ShowMarks'
 
 " Finish
 filetype plugin indent on

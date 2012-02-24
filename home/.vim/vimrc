@@ -214,7 +214,16 @@ let g:session_autosave = 'yes'
 " Don't save buffers that aren't visible
 set sessionoptions-=buffers
 
+" Don't set auto bindings for showmarks
+let g:showmarks_no_mappings = 1
+
 " Additional mappings {{{
+
+" ShowMarks
+map <Leader>M :ShowMarksToggle<cr>
+map <Leader>mh :ShowMarksClearMark<cr>
+map <Leader>ma :ShowMarksClearAll<cr>
+map <Leader>mm :ShowMarksPlaceMark<cr>
 
 " Git shortcuts
 "  <Leader>gc -> git commit
