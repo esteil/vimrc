@@ -190,8 +190,9 @@ set modeline
 set modelines=10
 
 " Default color scheme
-colorscheme railscasts
+" colorscheme railscasts
 " colorscheme mirodark
+colorscheme badwolf
 
 " Directories for swp files
 set backupdir=~/.vim/backup

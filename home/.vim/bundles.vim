@@ -51,6 +51,7 @@ Bundle 'majutsushi/tagbar'
 Bundle 'gmarik/sudo-gui.vim'
 Bundle 'skammer/vim-css-color'
 Bundle 'juvenn/mustache.vim'
+Bundle 'sjl/badwolf'
 
 " Finish
 filetype plugin indent on
