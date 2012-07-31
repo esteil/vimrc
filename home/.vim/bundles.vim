@@ -53,6 +53,9 @@ Bundle 'skammer/vim-css-color'
 Bundle 'juvenn/mustache.vim'
 Bundle 'sjl/badwolf'
 Bundle 'harleypig/ShowMarks'
+Bundle 'kien/ctrlp.vim'
+Bundle 'jceb/vim-orgmode'
+Bundle 'nblock/vim-dokuwiki'
 
 " Finish
 filetype plugin indent on

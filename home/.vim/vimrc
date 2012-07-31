@@ -54,14 +54,15 @@ set wildmode=list:longest,list:full
 " Various files to ignore for command-T and tab completion
 set wildignore+=*.o,*.obj,.git,*.rbc,*.class,.svn,vendor/gems/*
 set wildignore+=public/photo*/**
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=vendor/cache/**
-set wildignore+=solr/**
-set wildignore+=dump/**
-set wildignore+=wp-content/uploads/**
-set wildignore+=wp-content/themes/betanews/images/media/**
-set wildignore+=db_dumps/**
+set wildignore+=*/log/*
+set wildignore+=*/tmp/*
+set wildignore+=*/vendor/cache/*
+set wildignore+=*/solr/*
+set wildignore+=*/dump/*
+set wildignore+=*/wp-content/uploads/*
+set wildignore+=*/wp-content/themes/betanews/images/media/*
+set wildignore+=*/db_dumps/*
+set wildignore+=*/spec/reports/*
 
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time Command-T is used.
@@ -193,6 +194,7 @@ set modelines=10
 " colorscheme railscasts
 " colorscheme mirodark
 colorscheme badwolf
+" colorscheme jellybeans
 
 " Directories for swp files
 set backupdir=~/.vim/backup
@@ -216,6 +218,72 @@ set sessionoptions-=buffers
 
 " Don't set auto bindings for showmarks
 let g:showmarks_no_mappings = 1
+
+" CtrlP configuration {{{
+
+" Enable Buffer Tags extension
+let g:ctrlp_extensions = ['buffertag']
+
+" Max files
+let g:ctrlp_max_files = 20000
+
+" Custom ignores
+let g:ctrlp_custom_ignore = {
+      \  'dir':  '\.git$\|\.hg$\|\.svn$\|tmp$\|public/photo\.noindex$',
+      \  'link': 'public/photo$',
+      \  'file': '\.jpg$\|\.png$\|\.gif$'
+      \ }
+
+" Open new files in new tabs
+let g:ctrlp_open_new_file = 't'
+
+" Open multi files in tabs
+let g:ctrlp_open_multi = '1t'
+
+" 20 lines high
+let g:ctrlp_max_height = 20
+
+" Matches at top
+let g:ctrlp_match_window_reversed = 0
+
+" Don't highlight
+let g:ctrlp_highlight_match = 0
+
+" <cr> opens in new tab, <c-t> opens in same tab
+let g:ctrlp_prompt_mappings = {
+      \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+      \ 'AcceptSelection("e")': ['<c-t>', '<MiddleMouse>']
+      \ }
+
+" Use matcher for ctrl-p's matches
+"
+" https://github.com/burke/matcher
+let g:path_to_matcher = $HOME . '/bin/matcher'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard']
+let g:ctrlp_match_func = { 'match': 'GoodMatch' }
+
+function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
+  " Create cache file if it doesn't exist
+  let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
+  if !( filereadable(cachefile) && a:items == readfile(cachefile) )
+    call writefile(a:items, cachefile)
+  endif
+  if !filereadable(cachefile)
+    return []
+  endif
+
+  " a:mmode is currently ignored. In the future, we should probably do
+  " something about that. the matcher behaves like "full-line".
+  let cmd = g:path_to_matcher.' --limit '.a:limit.' --manifest '.cachefile.' '
+  if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
+    let cmd = cmd.'--no-dotfiles '
+  endif
+  let cmd = cmd.a:str
+
+  return split(system(cmd), "\n")  
+endfunction
+
+" }}}
 
 " Additional mappings {{{
 
