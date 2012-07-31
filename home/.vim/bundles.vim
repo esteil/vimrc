@@ -56,6 +56,7 @@ Bundle 'harleypig/ShowMarks'
 Bundle 'kien/ctrlp.vim'
 Bundle 'jceb/vim-orgmode'
 Bundle 'nblock/vim-dokuwiki'
+Bundle 'Lucius'
 
 " Finish
 filetype plugin indent on
